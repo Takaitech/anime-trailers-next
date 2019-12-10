@@ -15,7 +15,6 @@ const Footer = () =>  {
     return(
         <div className="footer">
             <input onClick={(e) => showOverlay(e)} type="button" value="VIDEOS"></input>
-            <div className="clipShape"></div>
             <div className="buttonWrapper">
             </div>
             <style jsx>{`
@@ -28,14 +27,6 @@ const Footer = () =>  {
                     z-index: 0;
                 }
 
-                .clipShape {
-                    flex: 0 0 5%;
-
-                    min-height: 150px;
-                    background-color: #E6E6E6;
-                    clip-path: polygon(100% 0, 87% 100%, 100% 100%);
-
-                }
 
                 .buttonWrapper {
                     background-color: #E6E6E6;
@@ -44,6 +35,10 @@ const Footer = () =>  {
                 }
 
                 input {
+                    font-family: council, sans-serif;
+                    font-weight: 400;
+                    font-style: normal;
+                    font-size: 2em;
                     background-color: ${!Object.keys(selected).length == 0 ? '#fd6568' : '#C3C3C3'};
                     color: black;
                     height: 75px;

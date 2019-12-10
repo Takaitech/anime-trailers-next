@@ -12,6 +12,7 @@ import FilterContextProvider from "../contexts/FilterContext";
 import SearchContextProvider from "../contexts/SearchContext";
 import AnimeContextProvider from "../contexts/AnimeContext";
 import OverlayContextProvider from "../contexts/OverlayContext"
+import { device } from '../devices'
 
 
 const Index = ({ topAnime }) => (
@@ -19,8 +20,9 @@ const Index = ({ topAnime }) => (
     <Head>
       <title>Anime Trailers</title>
       <link href="/styles/lity.min.css" rel="stylesheet"></link>
-      <script src="/jquery.js"></script>
+      <script src="/jquery.js"></script> 
       <script src="/lity.min.js"></script>
+      <link rel="stylesheet" href="https://use.typekit.net/cye7qdh.css"></link>
     </Head>
     <FilterContextProvider>
       <SearchContextProvider>
@@ -29,9 +31,11 @@ const Index = ({ topAnime }) => (
             <VideosOverlay></VideosOverlay>
             <Footer></Footer>
             <Header></Header>
-            <Search></Search>
-            <Carousel topAnime={topAnime}></Carousel>
-            <Filters></Filters>
+            <div className="center-wrapper">
+              <Search></Search>  
+              <Carousel topAnime={topAnime}></Carousel> 
+              <Filters></Filters>
+            </div>
             <Footer></Footer>
           </OverlayContextProvider>
         </AnimeContextProvider>
@@ -47,9 +51,38 @@ const Index = ({ topAnime }) => (
           height: 100%;
           width: 100%;
           margin: 0;
-          background-color: rgb(15, 15, 15);
-          font-family: system-ui;
+          background-color: rgb(15, 15, 15);     
+          font-family: campaign, sans-serif;
+          font-weight: 200;
+          font-style: normal;
+          
+        }
 
+        .app {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          margin: 0 auto;
+          position: relative;
+          overflow: hidden;
+
+        }
+
+        .center-wrapper {
+          align-items: center;
+          display: flex;
+          justify-content: left;
+          flex-wrap: wrap;
+          position: relative;
+          top: 25px;
+          max-width: 100%;
+
+        }
+
+        @media ${device.laptop} { 
+          .app {
+            width: 80%;
+          }
         }
       `}
     </style>
