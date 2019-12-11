@@ -1,3 +1,4 @@
+import { device } from '../devices'
 const Header = () => (
     <header >
         <div className="shape"></div>
@@ -26,7 +27,7 @@ const Header = () => (
 
             .logoWrapper {
                 background-color: #E6E6E6;
-                flex: 0 0 50%;
+                flex: 0 0 56%;
                 min-height: 150px;
                 text-align: right;
 
@@ -34,6 +35,7 @@ const Header = () => (
             .logoArt{
                 height: 110px;
                 margin: 15px 15px 0 0;
+                order: 2;
 
             }
             
@@ -43,11 +45,29 @@ const Header = () => (
                 font-weight: 400;
                 font-style: normal;
                 text-align: center;
-                font-size: 21pt;
+                font-size: 1.8em;
                 text-align: center;
-                width: 80%;
+                width: 100%;
                 margin: 0 10px 5px 0px;
                 display: inline-block;
+                order: 1;
+            }
+
+            @media ${device.laptop} {
+
+                .title {
+                    font-size: 4em;
+                }
+
+                .logoWrapper {
+                    margin-right: 10%;
+                    flex: 0 0 40%;
+                    display: flex;
+                    min-height: 300px;
+                    align-items: center;
+
+                }
+                
             }
         `}
         </style>

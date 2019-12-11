@@ -30,18 +30,26 @@ const Filters = () => {
                span {
                     position: relative;
                     color: white;
-                    font-size: 1.5em;
+                    font-size: 1.2em;
                     z-index: 1;
                 }
 
                 .topFilter {
                     display: block;
                     margin-top: 10px;
-                    color: ${filter === 'top' ? "white" : "#5F5F5F"}
-
+                    color: ${filter === 'top' ? "white" : "#5F5F5F"};                 transform: rotateX(85deg);
+                    transform: scale(1);
+                    transition: transform 1s;
                 }
                 .upcomingFilter {
-                    color: ${filter === 'upcoming' ? "white" : "#5F5F5F"}
+                    display: block;
+                    transform: scale(1);
+                    transition: transform 1s;
+                    color: ${filter === 'upcoming' ? "white" : "#5F5F5F"};
+                }
+
+                .upcomingFilter:hover, .topFilter:hover {
+                    transform: scale(1.1);
                 }
 
             `}

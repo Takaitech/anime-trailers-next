@@ -34,8 +34,11 @@ const VideosOverlay = () => {
     return(
         <div onClick={() => hideOverlay()} className="overlay">
             <div className="info">
-                <h2 className='title'>{selected.title}</h2>
-                <h2 className='rating'>{selected.score + '/10'}</h2>
+                <div>
+                    <h2 className='title'>{selected.title}</h2>
+                    <h2 className='rating'>{selected.score === 0 || selected.score === undefined ? 'No current ratings' : selected.score + '/10'}</h2>
+                </div>
+                <img className='image' src={selected.image_url}></img>
             </div>
             <div className='trailerCarousel'>
                 {trailers.map((trailer,index) => (
@@ -59,21 +62,32 @@ const VideosOverlay = () => {
                     background-color: rgb(0,0,0);
                     background-color: rgb(0,0,0,.9);
                     margin-left: auto;
-                    margin-right:auto;
+                    margin-right: auto;
                     display: ${hidden === true? "none" : "flex"};
                     flex-direction: column;
+                    overflow:scroll;
+                }
+
+                .image {
+                    height: 150px;
                 }
 
                 .info {
                     width: 80%;
-                    margin: 0 auto;
                     flex: 0 0 30%;
+                    text-align:center;
+                    margin: 30px auto;
+                    border-bottom: 2px solid rgb(71,71,71);
+                    display: flex;
+                    justify-content: space-between;
+                    
                 }
 
                 .title {
                     color: white;
-                    text-align: left;
                     margin-bottom: 10px;
+                    text-align:left;
+
                 }
 
                 .rating {
@@ -89,14 +103,18 @@ const VideosOverlay = () => {
                     display: flex;
                     flex-wrap: wrap;
                     align-items: center;
+                    justify-content: center;
+                    margin-bottom: 50px;
                 }
 
                 .trailerLink {
-                    text-decoration: none
+                    text-decoration: none;
                 }
 
                 a:link {
                     text-decoration:none;
+                    display: block;
+                    margin: 25px 0;
                 }
                 
                 a:visited {
@@ -112,12 +130,30 @@ const VideosOverlay = () => {
                 }
 
                 .trailer {
+                    
+                    text-align: center;
                     width: 80%;
                     margin:0 auto 10px auto;
+                    
                 }
                 .trailer img {
+
+                box-sizing: border-box;
                     width: 100%;
+                    box-shadow: 0 0 0 2px white;
+                    transition: box-shadow 1s;
                 }
+                .trailer img:hover {
+                    width: 100%;
+                    box-shadow: 0 0 0 10px  white;
+
+                }
+
+                .trailer img:active {
+                    width: 100%;
+                    box-shadow: 0 0 0 15px black;
+                }
+
                 .trailer h3 {
                     color: white;
                     text-align: left;

@@ -33,7 +33,10 @@ const Index = ({ topAnime }) => (
             <Header></Header>
             <div className="center-wrapper">
               <Search></Search>  
-              <Carousel topAnime={topAnime}></Carousel> 
+              <div className="center-row">
+                <Carousel topAnime={topAnime}></Carousel> 
+                <div className="right-block"></div>
+              </div>
               <Filters></Filters>
             </div>
             <Footer></Footer>
@@ -79,9 +82,26 @@ const Index = ({ topAnime }) => (
 
         }
 
+        .center-row {
+          width: 100%;
+        }
+
+        .right-block {
+          display: none;
+        }
+
         @media ${device.laptop} { 
           .app {
             width: 80%;
+          }
+          .right-block {
+            position: absolute;
+            top: -100%;
+            right: 0;
+            display:block;
+            background-color: #E6E6E6;
+            height: 2000px;
+            width: 10%;
           }
         }
       `}

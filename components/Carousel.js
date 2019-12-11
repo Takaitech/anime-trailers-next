@@ -26,8 +26,6 @@ const Carousel = ({ topAnime }) => {
     setIsDown(true);
     setStartX(e.pageX - carouselSelector.current.offsetLeft);
     setScrollLeft(carouselSelector.current.scrollLeft);
-    let scrollPercent = getScrollPercent()
-    setScrollProgress(scrollPercent);
   };
 
   let onMouseLeave = e => {
@@ -36,8 +34,6 @@ const Carousel = ({ topAnime }) => {
 
   let onMouseUp = e => {
     setIsDown(false);
-    let scrollPercent = getScrollPercent()
-    setScrollProgress(scrollPercent);
   };
 
   let onMouseMove = e => {
@@ -47,18 +43,16 @@ const Carousel = ({ topAnime }) => {
     const distance = (x - startX) * 3;
     carouselSelector.current.scrollLeft = scrollLeft - distance;
    
+    let scrollPercent = getScrollPercent()
+    setScrollProgress(scrollPercent);
     
   };
 
-  let onTouchStart = e => {
-        let scrollPercent = getScrollPercent()
-        setScrollProgress(scrollPercent);
-  }
+  let onTouchMove = e => {
+    let scrollPercent = getScrollPercent()
+    setScrollProgress(scrollPercent);
+}
 
-  let onTouchEnd = e => {
-        let scrollPercent = getScrollPercent()
-        setScrollProgress(scrollPercent);
-  }
 
   useEffect(() => {
     const url =
@@ -109,8 +103,7 @@ const Carousel = ({ topAnime }) => {
         onMouseLeave={e => onMouseLeave(e)}
         onMouseUp={e => onMouseUp(e)}
         onMouseMove={e => onMouseMove(e)}
-        onTouchStart={e => onTouchStart(e)}
-        onTouchEnd={e => onTouchEnd(e)}
+        onTouchMove={e => onTouchMove(e)}
 
       >
         {anime.map((anime, index) => (
@@ -120,10 +113,11 @@ const Carousel = ({ topAnime }) => {
       <div className="scrollBar"></div>
       <style jsx>{`
         .carouselWrapper {
-          width: 100%;
+            width: 100%;
         }
 
         .carousel {
+        width: 100%;
           cursor: pointer;
           display: flex;
           min-height: 175px;
@@ -145,13 +139,14 @@ const Carousel = ({ topAnime }) => {
           width: ${scrollProgress + '%'};
           height: 2px;
           background-color: rgb(71, 71, 51);
-          transition: 0.3s width;
         }
 
         @media ${device.laptop} {
             .scrollBar {
-                transition: 0.5s width;
 
+            }
+            .carouselWrapper {
+                width: 88%;
             }
         }
       `}</style>
