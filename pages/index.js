@@ -3,7 +3,6 @@ import Head from 'next/head';
 
 import fetch from "isomorphic-unfetch";
 import Header from "../components/Header";
-import Search from "../components/Search";
 import Carousel from "../components/Carousel";
 import Filters from "../components/Filters";
 import Footer from "../components/Footer";
@@ -32,7 +31,6 @@ const Index = ({ topAnime }) => (
             <Footer></Footer>
             <Header></Header>
             <div className="center-wrapper">
-              <Search></Search>  
               <div className="center-row">
                 <Carousel topAnime={topAnime}></Carousel> 
                 <div className="right-block"></div>
@@ -54,7 +52,7 @@ const Index = ({ topAnime }) => (
           height: 100%;
           width: 100%;
           margin: 0;
-          background-color: rgb(15, 15, 15);     
+          background-color: white;     
           font-family: campaign, sans-serif;
           font-weight: 200;
           font-style: normal;

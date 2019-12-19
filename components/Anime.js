@@ -4,7 +4,7 @@ import {device} from '.././devices'
 const Anime = ({anime}) => {
    
     const { selected, dispatch } = useContext(AnimeContext)
-    
+    console.log(anime)
    return (<div onClick={() => dispatch({type:'SELECT_ANIME',selected: anime}) } className="anime">
         <img draggable="false" src={anime.image_url}></img>
         <style jsx>{`

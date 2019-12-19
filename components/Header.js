@@ -1,11 +1,11 @@
+import Search from "../components/Search";
+
+
 import { device } from '../devices'
 const Header = () => (
     <header >
-        <div className="shape"></div>
-         <div className="logoWrapper">
-            <img className="logoArt" src="/images/logo-art.png"></img>
-            <h1 className="title">ANIME TRAILERS</h1>
-        </div>
+        <Search></Search>
+        <h1 className="title">ANIME TRAILERS</h1>
         <style jsx>{`
 
 
