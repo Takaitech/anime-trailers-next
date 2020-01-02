@@ -1,62 +1,142 @@
+import React, { useState, useEffect, useContext, useRef } from "react";
 import Search from "../components/Search";
+import { SearchContext } from "../contexts/SearchContext"
+
+import { device } from "../devices";
+
+const Header = () => {
+    const { search, dispatch } = useContext( SearchContext )
+
+  const title = useRef();
+  const toggleSearchMode = () => {
+    dispatch({type: "ACTIVATE_SEARCH", active: !search.active})
+    if (search.active) {
+      title.current.classList.remove("slideI");
+      title.current.classList.add("slideO");
+      console.log(title.current.classList);
+    } else {
+      title.current.classList.remove("slideO");
+      title.current.classList.add("slideI");
+    }
+  };
+
+  useEffect(() => {
+    if (search.active) {
+        title.current.classList.remove("slideI");
+        title.current.classList.add("slideO");
+        console.log(title.current.classList);
+      } else {
+        title.current.classList.remove("slideO");
+        title.current.classList.add("slideI");
+      }
+      console.log(search.active)
+  },[search])
 
 
-import { device } from '../devices'
-const Header = () => (
-    <header >
-        <Search></Search>
-        <h1 className="title">ANIME TRAILERS</h1>
-        <style jsx>{`
-
-
+  return (
+    <header>
+      <h1 ref={title} className="title">
+        ANIME TRAILERS
+      </h1>
+      <Search></Search>
+      <span className="searchButton" onClick={() => toggleSearchMode()}>
+        search
+      </span>
+      <style jsx>
+        {`
             header {
-                display: flex;
                 justify-content: flex-end;
                 width: 100%;
-                position:absolute;
-                top:0;
-                right: 0;
-            }
-
-            .clipShape {
-                background-color: #E6E6E6;
-                flex: 0 0 5%;
-                min-height: 150px;
-
-            }
-
-            .logoWrapper {
-                background-color: #E6E6E6;
-                flex: 0 0 56%;
-                min-height: 150px;
-                text-align: right;
-
-            }
-            .logoArt{
-                height: 110px;
-                margin: 15px 15px 0 0;
-                order: 2;
-
+                position: relative;
+                height: 20%;
+                background-color:#EF5050;
             }
             
-
             .title {
                 font-family: council, sans-serif;
                 font-weight: 400;
                 font-style: normal;
                 text-align: center;
-                font-size: 1.8em;
+                font-size: 3.5em;
                 text-align: center;
-                width: 100%;
                 margin: 0 10px 5px 0px;
                 display: inline-block;
                 order: 1;
+                color: white;
+                position: absolute;
+                right: 5px;
+                bottom: 25px;
             }
 
+            .searchButton {
+                display: block;
+                color: white;
+                position: absolute;
+                bottom: 15px;
+                left: 15px;
+                font-size: .75em;
+            }
+
+            .slideO {
+              animation: slideO 1s forwards;
+            }
+        
+            @keyframes slideO {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(200%);
+                }
+            }
+
+            .slideI {
+                animation: slideI 1s forwards;
+              }
+          
+              @keyframes slideI {
+                  0% {
+                      transform: translateX(200%);
+                  }
+                  100% {
+                      transform: translateX(0);
+                  }
+              }
+              
             @media ${device.laptop} {
+                
+                header {
+                    
+                    justify-content: flex-end;
+                    width: 80%;
+                    clip-path: polygon(2% 0, 100% 0%, 98% 100%, 0% 100%);
+    
+                }
+                
+                .searchButton {
+                    left: 35px;
+                    font-size:1.5em;
+                }
+
+                header {
+                    width: 80%;
+                    margin: 0 auto;
+                }
 
                 .title {
-                    font-size: 4em;
+                    font-family: council, sans-serif;
+                    font-weight: 400;
+                    font-style: normal;
+                    text-align: center;
+                    font-size: 10em;
+                    text-align: center;
+                    margin: 0 10px 5px 0px;
+                    display: inline-block;
+                    order: 1;
+                    color: white;
+                    position: absolute;
+                    right: 30px;
+                    bottom: 0px
                 }
 
                 .logoWrapper {
@@ -69,9 +149,11 @@ const Header = () => (
                 }
                 
             }
+        
         `}
-        </style>
+      </style>
     </header>
-)
+  );
+};
 
-export default Header
+export default Header;

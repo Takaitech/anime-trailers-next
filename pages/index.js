@@ -1,11 +1,9 @@
 import Link from "next/link";
 import Head from 'next/head';
-
 import fetch from "isomorphic-unfetch";
 import Header from "../components/Header";
 import Carousel from "../components/Carousel";
-import Filters from "../components/Filters";
-import Footer from "../components/Footer";
+import Footer from "../components/Footer"
 import VideosOverlay from '../components/VideosOverlay'
 import FilterContextProvider from "../contexts/FilterContext";
 import SearchContextProvider from "../contexts/SearchContext";
@@ -18,25 +16,21 @@ const Index = ({ topAnime }) => (
   <div className="app">
     <Head>
       <title>Anime Trailers</title>
+      <meta name="viewport" content="width=device-width, user-scalable=no"></meta>
       <link href="/styles/lity.min.css" rel="stylesheet"></link>
       <script src="/jquery.js"></script> 
       <script src="/lity.min.js"></script>
       <link rel="stylesheet" href="https://use.typekit.net/cye7qdh.css"></link>
+      import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+
     </Head>
     <FilterContextProvider>
       <SearchContextProvider>
         <AnimeContextProvider>
           <OverlayContextProvider>
             <VideosOverlay></VideosOverlay>
-            <Footer></Footer>
             <Header></Header>
-            <div className="center-wrapper">
-              <div className="center-row">
-                <Carousel topAnime={topAnime}></Carousel> 
-                <div className="right-block"></div>
-              </div>
-              <Filters></Filters>
-            </div>
+            <Carousel topAnime={topAnime}></Carousel> 
             <Footer></Footer>
           </OverlayContextProvider>
         </AnimeContextProvider>
@@ -45,6 +39,11 @@ const Index = ({ topAnime }) => (
     <style jsx global>
       {`
 
+        html,body {
+          overflow: hidden;
+          height: 100%;
+
+        }
         html,
         body,
         #__next,
@@ -53,53 +52,25 @@ const Index = ({ topAnime }) => (
           width: 100%;
           margin: 0;
           background-color: white;     
-          font-family: campaign, sans-serif;
+          font-family: titling-gothic-fb;
           font-weight: 200;
           font-style: normal;
-          
         }
 
         .app {
-          display: flex;
           align-items: center;
+          height: 100%;
           width: 100%;
           margin: 0 auto;
           position: relative;
-          overflow: hidden;
-
         }
 
-        .center-wrapper {
-          align-items: center;
-          display: flex;
-          justify-content: left;
-          flex-wrap: wrap;
-          position: relative;
-          top: 25px;
-          max-width: 100%;
-
-        }
-
-        .center-row {
-          width: 100%;
-        }
-
-        .right-block {
-          display: none;
-        }
 
         @media ${device.laptop} { 
           .app {
-            width: 80%;
-          }
-          .right-block {
-            position: absolute;
-            top: -100%;
-            right: 0;
-            display:block;
-            background-color: #E6E6E6;
-            height: 2000px;
-            width: 10%;
+            width: 100%;
+            padding-top: 20px;
+
           }
         }
       `}

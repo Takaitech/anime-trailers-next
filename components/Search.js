@@ -1,70 +1,85 @@
 import React, {useContext, useRef} from 'react'
 import { SearchContext } from '../contexts/SearchContext'
+import { device } from '../devices'
 
 const Search = () => {
 
-    const { dispatch } = useContext( SearchContext )
+    const { search, dispatch } = useContext( SearchContext )
     const searchText = useRef('');
 
     const updateSearchQuery = (e) => {
         e.preventDefault()
         dispatch({type:'UPDATE_QUERY', query: searchText.current.value})
+        dispatch({type:'ACTIVATE_SEARCH', active: !search.active})
+        searchText.current.blur()
+        searchText.current.value = ''
+    }
+
+    const unactivateSearch = () => {
+        dispatch({type:'ACTIVATE_SEARCH', active: !search.active})
+        searchText.current.value = ''
+
+
+    }
+
+    if(search.active === true) {
+        searchText.current.focus()
     }
 
     return (
         <div className="searchBar">
-            <form onSubmit={(e) => updateSearchQuery(e)}>
-                <input className="searchInput" ref={searchText} placeholder="search"></input>
-                <img src="/images/Search-icon.png" onClick={(e) => updateSearchQuery(e)} className="submitSearch" type="submit" />
+            <form onSubmit={(e) => updateSearchQuery(e)}>''
+                <input className="searchInput" onClick={(e) => updateSearchQuery(e) } onFocus={() => searchText.current.value = ''} onBlur={() => unactivateSearch()} ref={searchText} ></input>
             </form>
             <style jsx>{`
                 .searchBar {
                     min-height: 20px;
                     display:flex;
                     align-items: center;
+                    position: absolute;
+                    bottom: 49px;
+                    left: -16px;
+                    width:99%;
                 }
 
                 .searchInput {
                     background-color: transparent;
                     border: none;
-                    border-bottom: 1px solid white;  
-                    margin: 15px; 
+                    border-bottom: 3px solid white;  
+                    margin-bottom: 15px; 
                     margin-right: 10px;
                     color: white;
-                    font-size: .9em;
+                    font-size: 1.5em;
                     font-family: campaign, sans-serif;
                     font-weight: 200;
                     font-style: normal;
-                    width: 45%;
+                    width: 100%;
                     outline: none;
                     -webkit-appearance: none;
-
+                    padding-left: 5%;
+                    position:relative;
+                    top: 10px;
                 }
 
                 form {
-                    display:flex;
                     align-items: center;
+                    width: 100%
                 }
-                
+
                 .searchInput:focus {
                     border-color: inherit;
                     -webkit-box-shadow: none;
                     box-shadow: none;
                 }
 
-                .submitSearch {
-                    height: 20px;
-                    color: white;
-                    -webkit-appearance: none;
-                    -moz-appearance: none;
-                    border: none;
-                    transition: transform .3s;
-                    
+                @media ${device.laptop} {
+                    .searchInput {
+                        border-bottom: 5px solid white;  
+                        padding-left: 2%;
+
+                    }
                 }
 
-                .submitSearch:active  {
-                    transform: scale(0.85);
-                }
             `}
             </style>
         </div>

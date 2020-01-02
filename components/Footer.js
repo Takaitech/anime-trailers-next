@@ -1,91 +1,92 @@
-import React, { useContext, useEffect, useRef} from 'react'
-import { AnimeContext } from '../contexts/AnimeContext'
+import React, {useContext} from 'react'
+import Filters from '../components/Filters'
+import AnimeInfo from '../components/AnimeInfo'
 import { OverlayContext } from '../contexts/OverlayContext'
-import { device } from '../devices'
-const Footer = () =>  {
+import { AnimeContext } from '../contexts/AnimeContext'
+import {device } from '../devices'
 
-    const { selected } = useContext(AnimeContext)
+const Footer = () => {
     const { dispatch } = useContext(OverlayContext)
-    const buttonRef = useRef() 
+    const { selected } = useContext(AnimeContext)
+
     const showOverlay = () => {
         if(!Object.keys(selected).length == 0) {
             dispatch({type:'HIDE_SHOW_OVERLAY', boolean:false})
         }
     }
 
-    useEffect(() => {
-    },[selected])
-
-    return( 
-        <div className="footer">
-            <div className="buttonWrapper">
-                <div ref={buttonRef} className={`openTrailers ${!Object.keys(selected).length == 0 ? 'animate' +selected.mal_id : ""}`}  onClick={(e) => showOverlay(e)} type="button" ><span>TRAILERS</span></div>
+    return (
+        <footer>
+            <Filters></Filters>
+            <AnimeInfo></AnimeInfo>
+            <div className="openTrailers" onClick={() => showOverlay()}>
+                <img src="icons/white-play-icon.png"></img>
             </div>
             <style jsx>{`
-                .footer {
-                    width: 100%;
+
+                footer {
                     display: flex;
-                    justify-content: flex-end;
-                    position: absolute;
-                    bottom: 0;
-                    z-index: 0;
+                    width: 90%;
+                    position: relative;
+                    height: 45%;
+                    flex-direction: column;
+                    margin: 0 auto;
                 }
 
-
-                .buttonWrapper {
-                    background-color: #E6E6E6;
-                    min-height: 150px;
-                    flex: 0 0 30%;
-                    position:relative;
-
-                }
 
                 .openTrailers {
-                    background-color: ${!Object.keys(selected).length == 0 ? '#fd6568' : '#C3C3C3'};
-                    height: 75px;
-                    position:absolute;
-                    left: -75px;
-                    top: 37.5px;
-                    display:flex;
-                    align-items: center;
-                    justify-content: center;
-                    width:  150px;
-                    max-width: 300px;
+                    position: absolute;
+                    right: 0px;
+                    bottom: 0px;
+                    background-color: #212121;
+                    height:40%;
+                    width: 40%;
+                    clip-path: polygon(99% 0, 22% 100%, 100% 100%);
+
                 }
 
-                .${'animate' +selected.mal_id} {
-                    animation: animate .5s forwards;
+                .openTrailers img {
+                    position: absolute;
+                    right: 5%;
+                    bottom: 5%;
                 }
 
-                span {
-                    font-family: council, sans-serif;
-                    font-weight: 400;
-                    font-style: normal;
-                    font-size: 2em;
-                    color: black;
-                }
-
-                @keyframes animate {
-                    0% {
-                        -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-                        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-                    }
-                    100% {
-                        -webkit-clip-path: polygon(10% 10%, 89% 6%, 94% 91%, 10% 90%);
-                        clip-path: polygon(10% 10%, 89% 6%, 94% 91%, 10% 90%);
-                    }
+                @media ${device.mobileS} {
+                    .openTrailers img {
+                        position: absolute;
+                        height: 45px;
+                        right: 2%;
+                        bottom: 2%;
+                    } 
                 }
 
                 @media ${device.laptop} {
-                    .buttonWrapper {
-                        margin-right: 10%;
+                    footer {
+                        width: 80%;
+                        margin: 0 auto;
+                        display: flex;
+                        right: 2.8%;
+                        flex-direction: row;
+                        height: 30%;
+                    }
+
+                    .openTrailers {
+                        position: absolute;
+                        background-color: #212121;
+                        height:40%;
+                        width: 10%;
+                        clip-path: polygon(80% 0, 0% 100%, 75% 100%);
     
                     }
-                }
 
+                    .openTrailers img {
+                        right: 25%;
+                        bottom: 5%;
+                    }
+                }
             `}
             </style>
-        </div>
+        </footer>
     )
 }
 

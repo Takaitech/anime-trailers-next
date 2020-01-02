@@ -4,11 +4,15 @@ import { SearchContext } from "../contexts/SearchContext";
 import { AnimeContext } from "../contexts/AnimeContext";
 import Anime from "./Anime";
 import {device} from "../devices"
+import Loader from 'react-loader-spinner'
+
 
 const Carousel = ({ topAnime }) => {
   const [anime, setAnime] = useState(topAnime);
+  const [loading, setLoading] = useState(false)
+
   const { filter } = useContext(FilterContext);
-  const { query } = useContext(SearchContext);
+  const { search } = useContext(SearchContext);
   const { selected, dispatch } = useContext(AnimeContext);
 
   const carouselSelector = useRef();
@@ -21,6 +25,20 @@ const Carousel = ({ topAnime }) => {
   const [isDown, setIsDown] = useState(false);
   const [startX, setStartX] = useState();
   const [scrollLeft, setScrollLeft] = useState();
+
+  let changeAnime = (response) => {
+
+    setAnime(response)
+    if( filter !== "init") {
+
+    let element = carouselSelector.current
+        element.classList.remove("wipeContent")
+        void element.offsetWidth
+        element.classList.add("wipeContent");
+
+    }
+  }
+
 
   let onMouseDown = e => {
     setIsDown(true);
@@ -54,19 +72,21 @@ const Carousel = ({ topAnime }) => {
 }
 
 
+
   useEffect(() => {
     const url =
-      filter === "top"
+      filter === "top" || filter === "init"
         ? "https://api.jikan.moe/v3/top/anime/1/bypopularity"
         : "https://api.jikan.moe/v3/top/anime/1/upcoming";
     fetch(url)
       .then(response => response.json())
-      .then(responseJson => setAnime(responseJson.top))
+      .then(responseJson => changeAnime(responseJson.top))
       .catch(err => console.log(err));
+
   }, [filter]);
 
   useEffect(() => {
-    if (query !== "") {
+    if (search.query !== "") {
       function formatQueryParams(params) {
         const queryItems = Object.keys(params).map(
           key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
@@ -76,28 +96,47 @@ const Carousel = ({ topAnime }) => {
 
       const baseurl = "https://api.jikan.moe/v3/search/anime";
       let params = {
-        q: query,
+        q: search.query,
         page: 1,
         type: "tv",
         limit: 10
       };
 
       let url = baseurl + "?" + formatQueryParams(params);
+      setLoading(true)
       fetch(url)
         .then(response => response.json())
-        .then(responseJson => setAnime(responseJson.results))
+        .then(responseJson => setAnime(responseJson.results) )
+        .then(res => setTimeout(() => {
+          setLoading(false)
+        },500))
         .catch(err => console.log(err));
     }
-  }, [query]);
+  }, [search.query]);
 
   useEffect(() => {
     dispatch({ type: "SELECT_ANIME", selected: {} });
   }, [anime]);
 
+  // useEffect(() => {
+  //   console.log(filter)
+  //   if(filter === "init") {
+
+  //   } else {
+  //     let element = carouselSelector.current
+  //     element.classList.remove("wipeContent")
+  //     void element.offsetWidth
+  //     element.classList.add("wipeContent");
+  //   }
+  // }, [filter])
+
   return (
     <div className="carouselWrapper">
+      {loading === true ? 
+      <Loader type="Circles" color="#ef5050" height={45} width={45} />
+      :
       <div
-        className={`carousel ${isDown === true ? "isDown" : ""}`}
+        className={`carousel ${isDown === true ? "isDown" : ""} ${search.query === '' && anime.length === 0 ? "" : "wipeContent" }`}
         ref={carouselSelector}
         onMouseDown={e => onMouseDown(e)}
         onMouseLeave={e => onMouseLeave(e)}
@@ -106,24 +145,40 @@ const Carousel = ({ topAnime }) => {
         onTouchMove={e => onTouchMove(e)}
 
       >
-        {anime.map((anime, index) => (
-          <Anime key={index} anime={anime} />
-        ))}
+        
+        {
+          anime.length === 0 ? 
+          <p>No Results</p>
+          :
+          anime.map((anime, index) => (
+            <Anime key={index} anime={anime} />
+          ))
+        }
       </div>
+      }
       <div className="scrollBar"></div>
       <style jsx>{`
         .carouselWrapper {
             width: 100%;
+            clip-path: polygon(2% 0, 100% 0%, 98% 100%, 0% 100%);
+            margin: 10px auto;
+            height: 30%;
+            display: flex;
+            align-items: center;
+            justify-content:center;
         }
 
         .carousel {
-        width: 100%;
+          width: 100%;
           cursor: pointer;
           display: flex;
           min-height: 175px;
+          height: 100%;
           max-width: 100%;
           overflow-y: scroll; /* has to be scroll, not auto */
           -webkit-overflow-scrolling: touch;
+          text-align: center;
+          align-items: center;
         }
 
         .carousel {
@@ -135,18 +190,42 @@ const Carousel = ({ topAnime }) => {
           display: none; // Safari and Chrome
         }
 
+        .carousel p {
+          width: 100%;
+        }
+
         .scrollBar {
           width: ${scrollProgress + '%'};
           height: 2px;
           background-color: rgb(71, 71, 51);
         }
 
+        .wipeContent {
+          animation: wipeContent 2s;
+        }
+
+        @keyframes wipeContent {
+          0% {
+            width: 0%;
+            opacity: 0;
+          }
+
+
+          100% {
+            width: 100%;
+          }
+        }
+
         @media ${device.laptop} {
+            .carouselWrapper {
+              width: 80%;
+              margin: 20px auto;
+              position: relative;
+              right: 1.7%;
+            }
+
             .scrollBar {
 
-            }
-            .carouselWrapper {
-                width: 88%;
             }
         }
       `}</style>

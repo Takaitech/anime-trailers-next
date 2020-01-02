@@ -1,13 +1,13 @@
 import React, { createContext, useReducer } from 'react'
 import { searchReducer } from '../reducers/searchReducer'
 
-export const SearchContext = createContext('') 
+export const SearchContext = createContext({query: "" , active: false }) 
 
 const SearchContextProvider = (props) => {
-    const [query, dispatch] = useReducer(searchReducer,'')
+    const [search, dispatch] = useReducer(searchReducer, { query: "" , active: false } )
 
     return(
-        <SearchContext.Provider value={{query, dispatch}}>
+        <SearchContext.Provider value={{search, dispatch}}>
             {props.children}
         </SearchContext.Provider>
     )

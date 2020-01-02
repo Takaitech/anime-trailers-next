@@ -9,9 +9,6 @@ const VideosOverlay = () => {
     const { dispatch, hidden } = useContext(OverlayContext)
     const [ trailers, setTrailers] = useState([])
 
-    const [ trailer, setTrailer] = useState()
-
-
     
         useEffect(() => {
             if(selected.mal_id !== undefined) {
