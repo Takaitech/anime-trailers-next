@@ -48,7 +48,7 @@ const AnimeInfo = () => {
   let styles = {
     position: 'absolute',
     top: '10px',
-    right: '15px'
+    right: '6%',
   };
 
   console.log(info);
@@ -164,7 +164,7 @@ const AnimeInfo = () => {
                   font-size: .7em;
                   margin: 0;
                   width: 65%;
-                  height: 100%;
+                  height: 89%;
                   overflow-x: auto;
                 }
 
@@ -213,73 +213,117 @@ const AnimeInfo = () => {
                   font-size: 1em;
                 }
               }
-                @media ${device.laptop} {
 
-                    .animeInfoBorder {
-                        clip-path: polygon(2% 0, 98.5% 0%, 97% 55% ,85% 100%, 0% 100%);
-                        height: 100%;
-                        position: static;
-                        margin-top: 0;
-                    }
-    
-                    .animeInfoWrapper {
-                        clip-path: polygon(2% 0, 98.5% 0%, 97% 55% ,85% 100%, 0% 100%);
-                        
-                    }
-    
-                    .animeInfo {
-                        display:flex;
-                        left: 3%;
-                        height: 100%;
-                        padding: 0;
-                    }
+              @media ${device.laptop} {
+               
+                .animeInfoBorder {
+                  clip-path: polygon(2% 0, 98.5% 0%, 97% 55% ,75% 100%, 0% 100%);
+                  height: 100%;
+                  position: static;
+                  margin-top: 0;
+              }
 
-                    .icon {
-                        height: 65px;
-                    }
-    
-                    .title {
-                        font-size: 1.5em;
-                        max-width: 250px;
-                        font-weight: 400;
-                        margin: 0 30px;
-                        border-right: 1px solid #9B9B9B;
-                        height: 50%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        flex: 0 0 25%;
-                    }
-    
-                    .info {
-                        height: 80%;
-                        border-top: none;
-                        margin-left: 15px;
-                        padding-top: 0;
-                        justify-content: space-around;
-                        flex: 0 0 45%;
+              .animeInfoWrapper {
+                  clip-path: polygon(2% 0, 98.5% 0%, 97% 55% ,75% 100%, 0% 100%);
+                  
+              }
 
-                    }
+              .animeInfo {
+                  display:flex;
+                  left: 3%;
+                  height: 100%;
+                  padding: 0;
+              }
 
-                    .info::-webkit-scrollbar {    display: none;}
+              .icon {
+                  height: 65px;
+              }
+
+              .title {
+                  font-size: 1.5em;
+                  max-width: 250px;
+                  font-weight: 400;
+                  margin: 0 20px;
+                  border-bottom: none;
+                  border-right: 1px solid #9B9B9B;
+                  height: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  flex: 0 0 25%;
+                  padding-right: 20px;
+                  margin-left: 40px;
+              }
+
+              .info {
+                  height: 80%;
+                  border-top: none;
+                  margin-left: 15px;
+                  padding-top: 0;
+                  justify-content: space-around;
+                  flex: 0 0 45%;
+
+              }
+
+              .info::-webkit-scrollbar {    display: none;}
 
 
-                    .ratingWrapper {
-                        margin-top: 0;
-                    }
+              .ratingWrapper {
+                  margin-top: 0;
+              }
 
-                    .videosWrapper {
-                        margin-top: 0;
-                    }
+              .videosWrapper {
+                  margin-top: 0;
+              }
 
-                    
-                    .info div {
-                        font-size: 1.2em;
-                    }
-    
+
+              .icon {
+                height: 30px;
+              }
+
+              .rating, .videos {
+                font-size: 1em;
+                
+              }
+              
+          }
+                @media ${device.laptopL} {
+                  .info {
+                    flex: 0 0 60%;
+
+                  }
+                  .animeInfoBorder {
+                    clip-path: polygon(2% 0, 98.5% 0%, 97% 55% ,85% 100%, 0% 100%);
+                    height: 100%;
+                    position: static;
+                    margin-top: 0;
+                }
+  
+                .animeInfoWrapper {
+                    clip-path: polygon(2% 0, 98.5% 0%, 97% 55% ,85% 100%, 0% 100%);
                     
                 }
+              }
 
+              @media ${device.desktop} {
+                .title {
+                  font-size: 2em;
+                }
+                
+                .synopsis {
+                  font-size: 1.4em
+                }
+
+
+              .icon {
+                height: 40px;
+              }
+
+                .rating, .videos {
+                  font-size: 1.3em;
+                  
+                }
+              }
             `}
       </style>
     </div>

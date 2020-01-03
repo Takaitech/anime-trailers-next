@@ -3,9 +3,7 @@ import { AnimeContext } from "../contexts/AnimeContext";
 import { device } from ".././devices";
 
 const Anime = ({ anime }) => {
-  let [animeInfo, setAnimeInfo] = useState();
 
-  let url = `https://api.jikan.moe/v3/anime/${anime.mal_id}/`
 
   const { selected, dispatch } = useContext(AnimeContext);
  

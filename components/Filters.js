@@ -72,8 +72,15 @@ const Filters = () => {
                         color: white;
                         font-size: 2em;
                         z-index: 1;
+                        margin-bottom: 20px;
                     }
     
+                }
+
+                @media ${device.desktop} {
+                    span {
+                        font-size: 3.5em;
+                    }
                 }
             `}
             </style>

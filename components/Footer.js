@@ -60,6 +60,16 @@ const Footer = () => {
                     } 
                 }
 
+                @media ${device.tablet} {
+                    .openTrailers img {
+                        height: 65px;
+
+                        right: 10%;
+                        bottom: 10%;
+                    }
+
+                }
+
                 @media ${device.laptop} {
                     footer {
                         width: 80%;
@@ -74,14 +84,36 @@ const Footer = () => {
                         position: absolute;
                         background-color: #212121;
                         height:40%;
-                        width: 10%;
-                        clip-path: polygon(80% 0, 0% 100%, 75% 100%);
+                        width: 16%;
+                        clip-path: polygon(85% 0, 0% 100%, 78% 100%);
     
                     }
 
                     .openTrailers img {
                         right: 25%;
+                        bottom: 10%;
+                        height: 40px;
+                    }
+                }
+
+                @media ${device.laptopL} {
+                    .openTrailers {
+                        clip-path: polygon(80% 0, 3% 100%, 75% 100%);
+                        width: 10%;
+
+                    }
+                    .openTrailers img {
+                        right: 28%;
+                        bottom: 7%;
+                        height: 40px;
+                    }
+                }
+
+                @media ${device.desktop} {
+                    .openTrailers img {
+                        right: 28%;
                         bottom: 5%;
+                        height: 70px;
                     }
                 }
             `}

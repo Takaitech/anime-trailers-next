@@ -40,36 +40,36 @@ const Carousel = ({ topAnime }) => {
   }
 
 
-  let onMouseDown = e => {
-    setIsDown(true);
-    setStartX(e.pageX - carouselSelector.current.offsetLeft);
-    setScrollLeft(carouselSelector.current.scrollLeft);
-  };
+//   let onMouseDown = e => {
+//     setIsDown(true);
+//     setStartX(e.pageX - carouselSelector.current.offsetLeft);
+//     setScrollLeft(carouselSelector.current.scrollLeft);
+//   };
 
-  let onMouseLeave = e => {
-    setIsDown(false);
-  };
+//   let onMouseLeave = e => {
+//     setIsDown(false);
+//   };
 
-  let onMouseUp = e => {
-    setIsDown(false);
-  };
+//   let onMouseUp = e => {
+//     setIsDown(false);
+//   };
 
-  let onMouseMove = e => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX;
-    const distance = (x - startX) * 3;
-    carouselSelector.current.scrollLeft = scrollLeft - distance;
+//   let onMouseMove = e => {
+//     if (!isDown) return;
+//     e.preventDefault();
+//     const x = e.pageX;
+//     const distance = (x - startX) * 3;
+//     carouselSelector.current.scrollLeft = scrollLeft - distance;
    
-    let scrollPercent = getScrollPercent()
-    setScrollProgress(scrollPercent);
+//     let scrollPercent = getScrollPercent()
+//     setScrollProgress(scrollPercent);
     
-  };
+//   };
 
-  let onTouchMove = e => {
-    let scrollPercent = getScrollPercent()
-    setScrollProgress(scrollPercent);
-}
+//   let onTouchMove = e => {
+//     let scrollPercent = getScrollPercent()
+//     setScrollProgress(scrollPercent);
+// }
 
 
 
@@ -99,16 +99,18 @@ const Carousel = ({ topAnime }) => {
         q: search.query,
         page: 1,
         type: "tv",
-        limit: 10
+        limit: 20
       };
 
       let url = baseurl + "?" + formatQueryParams(params);
+          carouselSelector.current.classList.add('wipeContent')
       setLoading(true)
       fetch(url)
         .then(response => response.json())
         .then(responseJson => setAnime(responseJson.results) )
         .then(res => setTimeout(() => {
           setLoading(false)
+          carouselSelector.current.classList.add('wipeContent')
         },500))
         .catch(err => console.log(err));
     }
@@ -130,19 +132,22 @@ const Carousel = ({ topAnime }) => {
   //   }
   // }, [filter])
 
+
+
   return (
-    <div className="carouselWrapper">
+    <div className="carouselWrapper" 
+    >
       {loading === true ? 
-      <Loader type="Circles" color="#ef5050" height={45} width={45} />
+      <Loader  type="Circles" color="#ef5050" height={45} width={45} />
       :
       <div
-        className={`carousel ${isDown === true ? "isDown" : ""} ${search.query === '' && anime.length === 0 ? "" : "wipeContent" }`}
+        className={`carousel ${isDown === true ? "isDown" : ""} `}
         ref={carouselSelector}
-        onMouseDown={e => onMouseDown(e)}
-        onMouseLeave={e => onMouseLeave(e)}
-        onMouseUp={e => onMouseUp(e)}
-        onMouseMove={e => onMouseMove(e)}
-        onTouchMove={e => onTouchMove(e)}
+        // onMouseDown={e => onMouseDown(e)}
+        // onMouseLeave={e => onMouseLeave(e)}
+        // onMouseUp={e => onMouseUp(e)}
+        // onMouseMove={e => onMouseMove(e)}
+        // onTouchMove={e => onTouchMove(e)}
 
       >
         
@@ -156,16 +161,15 @@ const Carousel = ({ topAnime }) => {
         }
       </div>
       }
-      <div className="scrollBar"></div>
       <style jsx>{`
         .carouselWrapper {
-            width: 100%;
+            width: 90%;
             clip-path: polygon(2% 0, 100% 0%, 98% 100%, 0% 100%);
             margin: 10px auto;
             height: 30%;
             display: flex;
             align-items: center;
-            justify-content:center;
+            justify-content: center;
         }
 
         .carousel {
@@ -179,6 +183,7 @@ const Carousel = ({ topAnime }) => {
           -webkit-overflow-scrolling: touch;
           text-align: center;
           align-items: center;
+          overflow-y: hidden;
         }
 
         .carousel {

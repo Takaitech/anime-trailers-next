@@ -128,7 +128,7 @@ const Header = () => {
                     font-weight: 400;
                     font-style: normal;
                     text-align: center;
-                    font-size: 10em;
+                    font-size: 9em;
                     text-align: center;
                     margin: 0 10px 5px 0px;
                     display: inline-block;

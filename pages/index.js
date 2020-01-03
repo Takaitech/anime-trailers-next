@@ -21,8 +21,6 @@ const Index = ({ topAnime }) => (
       <script src="/jquery.js"></script> 
       <script src="/lity.min.js"></script>
       <link rel="stylesheet" href="https://use.typekit.net/cye7qdh.css"></link>
-      import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
-
     </Head>
     <FilterContextProvider>
       <SearchContextProvider>

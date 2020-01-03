@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext} from 'react'
 import { AnimeContext } from '../contexts/AnimeContext'
 import { OverlayContext } from '../contexts/OverlayContext'
 import ModalVideo from 'react-modal-video'
-
-
+import { device } from '../devices'
+ 
 const VideosOverlay = () => {
     const { selected } = useContext(AnimeContext)
     const { dispatch, hidden } = useContext(OverlayContext)
@@ -65,33 +65,37 @@ const VideosOverlay = () => {
                     overflow:scroll;
                 }
 
-                .image {
-                    height: 150px;
-                }
-
                 .info {
                     width: 80%;
-                    flex: 0 0 30%;
                     text-align:center;
-                    margin: 30px auto;
+                    margin: 20px auto;
                     border-bottom: 2px solid rgb(71,71,71);
                     display: flex;
                     justify-content: space-between;
-                    
+                    padding-bottom: 22px;
+                }
+
+                .info div {
+                    flex: 0 0 50%;
+                }
+
+                .image {
+                    height: 150px;
                 }
 
                 .title {
                     color: white;
                     margin-bottom: 10px;
                     text-align:left;
-
+                    font-size: 1.1em;
                 }
 
                 .rating {
                     color: white;
                     text-align: left;
-                    font-size: 16px;
+                    font-size: .7em;
                     margin: 0;
+                    font-weight: 200;
                 }
 
 
@@ -101,17 +105,19 @@ const VideosOverlay = () => {
                     flex-wrap: wrap;
                     align-items: center;
                     justify-content: center;
+                    padding-bottom: 25px;
                     margin-bottom: 50px;
                 }
 
                 .trailerLink {
                     text-decoration: none;
+                    width: 100%;
                 }
 
                 a:link {
                     text-decoration:none;
                     display: block;
-                    margin: 25px 0;
+                    margin: 10px 0;
                 }
                 
                 a:visited {
@@ -130,12 +136,13 @@ const VideosOverlay = () => {
                     
                     text-align: center;
                     width: 80%;
+
                     margin:0 auto 10px auto;
                     
                 }
                 .trailer img {
 
-                box-sizing: border-box;
+                    box-sizing: border-box;
                     width: 100%;
                     box-shadow: 0 0 0 2px white;
                     transition: box-shadow 1s;
@@ -154,9 +161,73 @@ const VideosOverlay = () => {
                 .trailer h3 {
                     color: white;
                     text-align: left;
-                    font-size: 10px;
+                    font-size: .7em;
                     text-decoration: none;
                     border: none;
+                }
+
+                @media ${device.tablet} {
+
+                    .trailerlink {
+                        width: 80%;
+                    }
+
+                    .title {
+                        font-size: 2.5em;
+
+                    }
+
+                    .rating {
+                        font-size: 1.5em;
+
+                    }
+
+                    a:link {
+                        margin: 30px auto;
+                    }
+
+                    .image {
+                        height: 275px;
+                    }
+
+                    .trailer h3 {
+                        font-size: 1.3em;
+                    }
+                }
+
+                @media ${device.laptop} {
+
+                    .trailerCarousel {
+                        margin: 0 auto;
+                        width: 80%;
+                        justify-content: start;
+                    }
+
+                    .trailerlink {
+                        width: 50%;
+                    }
+                    a:link {
+                        margin: 60px 0;
+                    }
+
+                    .title {
+                        font-size: 2.7em;
+
+                    }
+
+                    .rating {
+                        font-size: 1.7em;
+
+                    }
+
+                    .image {
+                        height: 355px;
+                    }
+
+                    .trailer h3 {
+                        font-size: 1.3em;
+                    }
+
                 }
             `}
             </style>

@@ -29,9 +29,10 @@ const Search = () => {
     return (
         <div className="searchBar">
             <form onSubmit={(e) => updateSearchQuery(e)}>''
-                <input className="searchInput" onClick={(e) => updateSearchQuery(e) } onFocus={() => searchText.current.value = ''} onBlur={() => unactivateSearch()} ref={searchText} ></input>
+                <input type="text" className="searchInput" onClick={(e) => updateSearchQuery(e) } onFocus={() => searchText.current.value = ''} onBlur={() => unactivateSearch()} ref={searchText} ></input>
             </form>
             <style jsx>{`
+
                 .searchBar {
                     min-height: 20px;
                     display:flex;
@@ -56,20 +57,24 @@ const Search = () => {
                     width: 100%;
                     outline: none;
                     -webkit-appearance: none;
-                    padding-left: 5%;
+                    padding-left: 6%;
                     position:relative;
                     top: 10px;
+                    -webkit-appearance: none;
+                    border-radius: 0;
+                }
+
+                .searchInput:focus {
+                    outline: none;
+                    border-bottom: 4px solid white;  
+
+                    -webkit-box-shadow: none;
+                    box-shadow: none;
                 }
 
                 form {
                     align-items: center;
                     width: 100%
-                }
-
-                .searchInput:focus {
-                    border-color: inherit;
-                    -webkit-box-shadow: none;
-                    box-shadow: none;
                 }
 
                 @media ${device.laptop} {
