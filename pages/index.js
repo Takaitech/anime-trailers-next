@@ -80,7 +80,6 @@ Index.getInitialProps = async function() {
   const res = await fetch("https://api.jikan.moe/v3/top/anime/1/bypopularity");
   const data = await res.json();
 
-  console.log(`Show data fetched. Count: ${data.top.length}`);
 
   return {
     topAnime: data.top.map(entry => entry)

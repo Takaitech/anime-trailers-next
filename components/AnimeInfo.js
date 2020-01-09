@@ -15,7 +15,6 @@ const AnimeInfo = () => {
   let [info, setInfo] = useState();
   const [trailer, setTrailer] = useState([]);
   let [loading, setLoading] = useState(true);
-
   useEffect(() => {
     let stopLoading = res => {
       setTimeout(() => {
@@ -26,6 +25,7 @@ const AnimeInfo = () => {
     };
 
     if (selected.mal_id !== undefined) {
+      
       setLoading(true);
       fetch("https://api.jikan.moe/v3/anime/" + selected.mal_id + "/videos")
         .then(response => response.json())
@@ -51,7 +51,6 @@ const AnimeInfo = () => {
     right: '6%',
   };
 
-  console.log(info);
   return (
     <div className="animeInfoBorder">
       <div className="animeInfoWrapper">

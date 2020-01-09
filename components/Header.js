@@ -13,7 +13,6 @@ const Header = () => {
     if (search.active) {
       title.current.classList.remove("slideI");
       title.current.classList.add("slideO");
-      console.log(title.current.classList);
     } else {
       title.current.classList.remove("slideO");
       title.current.classList.add("slideI");
@@ -24,12 +23,10 @@ const Header = () => {
     if (search.active) {
         title.current.classList.remove("slideI");
         title.current.classList.add("slideO");
-        console.log(title.current.classList);
       } else {
         title.current.classList.remove("slideO");
         title.current.classList.add("slideI");
       }
-      console.log(search.active)
   },[search])
 
 
