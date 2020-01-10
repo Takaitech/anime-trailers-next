@@ -73,6 +73,7 @@ const VideosOverlay = () => {
                     display: flex;
                     justify-content: space-between;
                     padding-bottom: 22px;
+                    min-height: 150px;
                 }
 
                 .info div {
