@@ -187,9 +187,6 @@ const VideosOverlay = () => {
                         margin: 30px auto;
                     }
 
-                    .image {
-                        height: 275px;
-                    }
 
                     .trailer h3 {
                         font-size: 1.3em;
@@ -220,11 +217,6 @@ const VideosOverlay = () => {
                         font-size: 1.7em;
 
                     }
-
-                    .image {
-                        height: 355px;
-                    }
-
                     .trailer h3 {
                         font-size: 1.3em;
                     }
