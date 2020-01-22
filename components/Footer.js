@@ -10,8 +10,16 @@ const Footer = () => {
     const { selected } = useContext(AnimeContext)
 
     const showOverlay = () => {
+
+        fetch("https://api.jikan.moe/v3/anime/" + selected.mal_id + "/videos")
+        .then(response => response.json())
+        .then(responseJson => dispatch({type:'UPDATE_TRAILERS',trailers: responseJson.promo}))
+        .catch(err =>{
+            console.log(err)
+        })
+
         if(!Object.keys(selected).length == 0) {
-            dispatch({type:'HIDE_SHOW_OVERLAY', boolean:false})
+            dispatch({type:'HIDE_SHOW_OVERLAY', boolean:true})
         }
     }
 

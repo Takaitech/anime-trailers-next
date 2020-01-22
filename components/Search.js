@@ -80,7 +80,7 @@ const Search = () => {
                 @media ${device.laptop} {
                     .searchInput {
                         border-bottom: 5px solid white;  
-                        padding-left: 2%;
+                        padding-left: 3.5%;
 
                     }
                 }

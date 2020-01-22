@@ -74,10 +74,16 @@ const Carousel = ({ topAnime }) => {
 
 
   useEffect(() => {
-    const url =
-      filter === "top" || filter === "init"
-        ? "https://api.jikan.moe/v3/top/anime/1/bypopularity"
-        : "https://api.jikan.moe/v3/top/anime/1/upcoming";
+    let url = ""
+
+    if(filter === "top" || filter === "init") {
+      url = "https://api.jikan.moe/v3/top/anime/1/bypopularity"
+    } else if(filter === "upcoming") {
+      url = "https://api.jikan.moe/v3/top/anime/1/upcoming"
+    } else(
+      url = "https://api.jikan.moe/v3/top/anime/1/movie"
+    )
+     
     fetch(url)
       .then(response => response.json())
       .then(responseJson => changeAnime(responseJson.top))
@@ -164,7 +170,6 @@ const Carousel = ({ topAnime }) => {
       <style jsx>{`
         .carouselWrapper {
             width: 90%;
-            clip-path: polygon(2% 0, 100% 0%, 98% 100%, 0% 100%);
             margin: 10px auto;
             height: 30%;
             display: flex;
@@ -223,10 +228,12 @@ const Carousel = ({ topAnime }) => {
 
         @media ${device.laptop} {
             .carouselWrapper {
-              width: 80%;
+              width: 80.5%;
               margin: 20px auto;
               position: relative;
               right: 1.7%;
+              clip-path: polygon(2% 0, 100% 0%, 98% 100%, 0% 100%);
+
             }
 
             .scrollBar {

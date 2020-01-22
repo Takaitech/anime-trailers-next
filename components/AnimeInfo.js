@@ -27,12 +27,7 @@ const AnimeInfo = () => {
     if (selected.mal_id !== undefined) {
       
       setLoading(true);
-      fetch("https://api.jikan.moe/v3/anime/" + selected.mal_id + "/videos")
-        .then(response => response.json())
-        .then(responseJson => setTrailer(responseJson.promo))
-        .catch(err => {
-          console.log(err);
-        });
+     
 
       fetch(`https://api.jikan.moe/v3/anime/${selected.mal_id}`)
         .then(response => response.json())
@@ -68,6 +63,12 @@ const AnimeInfo = () => {
               <p className="synopsis">{info.synopsis}</p>
               <div className="dataWrapper">
                 <div className="ratingWrapper">
+                
+                  <div className="rating">
+                    {selected.score === 0 || selected.score === undefined
+                      ? "No rating"
+                      : selected.score + "/10"}
+                  </div>
                   <img
                     className="icon rating"
                     src={
@@ -76,20 +77,6 @@ const AnimeInfo = () => {
                         : "icons/star-filled-icon.png"
                     }
                   ></img>
-                  <div className="rating">
-                    {selected.score === 0 || selected.score === undefined
-                      ? "No rating"
-                      : selected.score + "/10"}
-                  </div>
-                </div>
-                <div className="videosWrapper">
-                  <img
-                    className="icon videos"
-                    src="icons/video-playlist-icon.png"
-                  ></img>
-                  <div className="videos">
-                    {trailer !== [] ? trailer.length : ""}
-                  </div>
                 </div>
               </div>
             </div>
@@ -133,7 +120,7 @@ const AnimeInfo = () => {
                     font-weight: 400;
                     border-bottom: 1px solid #9B9B9B;
                     padding-bottom: 10px;
-                  text-align: left;
+                    text-align: left;
                 }
 
                 .loader {
@@ -151,7 +138,6 @@ const AnimeInfo = () => {
                     display:flex;
                 }
 
-                .synopsis::-webkit-scrollbar {    display: none;}
 
                 .info div {
                     visibility: ${
@@ -162,9 +148,26 @@ const AnimeInfo = () => {
                 .synopsis {
                   font-size: .7em;
                   margin: 0;
-                  width: 65%;
+                  width: 60%;
                   height: 89%;
                   overflow-x: auto;
+                  padding-right: 15px;
+                }
+
+                .synopsis::-webkit-scrollbar {
+                  width: 5px;
+                }
+
+                .synopsis::-webkit-scrollbar-thumb {
+                  background-color: #EF5050;
+                  border-radius: 6px;
+
+                }
+
+                .synopsis::-webkit-scrollbar-track {
+                  background-color: rgba(2,2,2,0.2);
+
+
                 }
 
                 .ratingWrapper {

@@ -6,28 +6,14 @@ import { device } from '../devices'
  
 const VideosOverlay = () => {
     const { selected } = useContext(AnimeContext)
-    const { dispatch, hidden } = useContext(OverlayContext)
-    const [ trailers, setTrailers] = useState([])
-
-    
-        useEffect(() => {
-            if(selected.mal_id !== undefined) {
-            fetch("https://api.jikan.moe/v3/anime/" + selected.mal_id + "/videos")
-            .then(response => response.json())
-            .then(responseJson => setTrailers(responseJson.promo))
-            .catch(err =>{
-                console.log(err)
-            })
-            }
-        },[selected])
-
+    const { dispatch, overlay } = useContext(OverlayContext)
 
     const hideOverlay = () => {
-        dispatch({type:'HIDE_SHOW_OVERLAY', boolean:true})
+        dispatch({type:'HIDE_SHOW_OVERLAY', open:true})
     }
 
 
-
+    console.log(overlay.trailers)
     return(
         <div onClick={() => hideOverlay()} className="overlay">
             <div className="info">
@@ -38,7 +24,7 @@ const VideosOverlay = () => {
                 <img className='image' src={selected.image_url}></img>
             </div>
             <div className='trailerCarousel'>
-                {trailers.map((trailer,index) => (
+                {overlay.trailers.map((trailer,index) => (
                     <a className="trailerlink" href={trailer.video_url} key={index} data-lity>
                         <div className="trailer" >
                             <img src={trailer.image_url}></img>
@@ -60,7 +46,7 @@ const VideosOverlay = () => {
                     background-color: rgb(0,0,0,.9);
                     margin-left: auto;
                     margin-right: auto;
-                    display: ${hidden === true? "none" : "flex"};
+                    display: ${overlay.open === true? "flex" : "none"};
                     flex-direction: column;
                     overflow:scroll;
                 }
@@ -186,7 +172,6 @@ const VideosOverlay = () => {
                     a:link {
                         margin: 30px auto;
                     }
-
 
                     .trailer h3 {
                         font-size: 1.3em;
