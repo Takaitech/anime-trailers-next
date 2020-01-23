@@ -179,15 +179,6 @@ const AnimeInfo = () => {
                     margin-bottom: 15%;
                 }
 
-                .videosWrapper {
-                    display: block;
-                    visibility: ${
-                      selected.title === undefined ? "hidden" : "visible"
-                    };
-                    display: flex;
-                    align-items: center;
-                }
-
                 .icon {
                     height: 20px;
                     -webkit-filter: ${
@@ -199,7 +190,7 @@ const AnimeInfo = () => {
                     margin-left: 10px;
                 }
 
-                .rating, .videos {
+                .rating {
                     margin-left: 10px;
                     font-size: .7em;
 
@@ -274,16 +265,13 @@ const AnimeInfo = () => {
                   margin-top: 0;
               }
 
-              .videosWrapper {
-                  margin-top: 0;
-              }
 
 
               .icon {
                 height: 30px;
               }
 
-              .rating, .videos {
+              .rating {
                 font-size: 1em;
                 
               }
@@ -321,7 +309,7 @@ const AnimeInfo = () => {
                 height: 40px;
               }
 
-                .rating, .videos {
+                .rating {
                   font-size: 1.3em;
                   
                 }
